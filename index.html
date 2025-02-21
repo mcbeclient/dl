@@ -17,51 +17,96 @@
     @keyframes slideDown {from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
     @keyframes slideUp {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
     @keyframes slideRight {from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
-    body {font-family:'Inter',system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;
-      align-items:center;min-height:100vh;margin:0;padding:calc(2rem+env(safe-area-inset-top)) 2rem 2rem;
+    body {
+      font-family:'Inter',system-ui,-apple-system,sans-serif;
+      display:flex;flex-direction:column;align-items:center;min-height:100vh;
+      margin:0;padding:calc(2rem+env(safe-area-inset-top)) 2rem 2rem;
       background:linear-gradient(45deg,var(--background-dark),var(--background-darker),var(--background-gray));
-      background-size:400% 400%;animation:gradientBG 15s ease infinite;color:var(--text-light);line-height:1.6;}
-    .global-search-bar {width:min(90%,250px);padding:1rem 1.5rem;margin:1rem 0;border:1px solid var(--border-color);
-      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);color:var(--text-light);
-      font-size:1rem;font-weight:bold;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.1);box-sizing:border-box;}
+      background-size:400% 400%;animation:gradientBG 15s ease infinite;
+      color:var(--text-light);line-height:1.6;
+    }
+    .global-search-bar {
+      width:min(90%,250px);padding:1rem 1.5rem;margin:1rem 0;border:1px solid var(--border-color);
+      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);
+      color:var(--text-light);font-size:1rem;font-weight:bold;transition:all 0.3s ease;
+      box-shadow:0 4px 20px rgba(0,0,0,0.1);box-sizing:border-box;
+    }
     .global-search-bar:focus {outline:none;border-color:var(--primary-color);box-shadow:0 0 15px rgba(0,123,255,0.2);}
-    .logo {width:120px;height:120px;border-radius:50%;margin:2rem 0;border:3px solid var(--primary-color);
-      box-shadow:0 0 30px rgba(0,123,255,0.3);animation:floatNoSpin 4s ease-in-out infinite;transition:transform 0.3s ease;}
+    .logo {
+      width:120px;height:120px;border-radius:50%;margin:2rem 0;border:3px solid var(--primary-color);
+      box-shadow:0 0 30px rgba(0,123,255,0.3);animation:floatNoSpin 4s ease-in-out infinite;
+      transition:transform 0.3s ease;
+    }
     .logo:hover {transform:scale(1.05);}
-    .lobby-link {display:block;text-align:center;margin-bottom:1rem;color:var(--primary-color);
-      text-decoration:none;font-size:1.5rem;font-weight:bold;}
-    .folder-container {background:var(--transparent-bg);border:1px solid var(--border-color);
-      border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.1);overflow:hidden;
-      animation:scaleUp 0.6s cubic-bezier(0.23,1,0.32,1);}
+    .lobby-link {
+      display:block;text-align:center;margin-bottom:1rem;color:var(--primary-color);
+      text-decoration:none;font-size:1.5rem;font-weight:bold;
+    }
+    .folder-container {
+      background:var(--transparent-bg);border:1px solid var(--border-color);
+      border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.1);
+      overflow:hidden;animation:scaleUp 0.6s cubic-bezier(0.23,1,0.32,1);
+    }
     #mainSection {width:min(90%,250px);margin:1rem auto;text-align:center;}
-    .hidden-section {display:none;width:min(90%,450px);margin:2rem auto;text-align:center;}
+    .hidden-section {
+      display:none;width:min(90%,450px);margin:2rem auto;text-align:center;
+    }
+    /* Android section expanded for mobile view */
+    #androidSection {width:min(90%,600px);}
     .hidden-section:focus {outline:none;}
-    .folder-header {padding:1.5rem;background:var(--glass-bg);font-size:1.5rem;font-weight:700;
-      text-align:center;position:relative;color:var(--primary-color);border-bottom:1px solid var(--border-color);}
-    .clickable {display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.25rem 2rem;
-      color:var(--text-light);font-weight:bold;transition:all 0.3s ease;position:relative;overflow:hidden;cursor:pointer;}
-    .clickable::before {content:'';position:absolute;left:0;width:3px;height:0;background:var(--primary-color);
-      transition:height 0.3s ease;}
+    .folder-header {
+      padding:1.5rem;background:var(--glass-bg);font-size:1.5rem;font-weight:700;
+      text-align:center;position:relative;color:var(--primary-color);
+      border-bottom:1px solid var(--border-color);
+    }
+    .clickable {
+      display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.25rem 2rem;
+      color:var(--text-light);font-weight:bold;transition:all 0.3s ease;
+      position:relative;overflow:hidden;cursor:pointer;
+    }
+    .clickable::before {
+      content:'';position:absolute;left:0;width:3px;height:0;background:var(--primary-color);
+      transition:height 0.3s ease;
+    }
     .clickable:hover {background:var(--glass-bg);padding-left:2.5rem;}
     .clickable:hover::before {height:100%;}
-    .back-button {display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;margin:1.5rem;
-      border:none;border-radius:50px;background:var(--primary-color);color:#FFF;font-weight:bold;cursor:pointer;
-      transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,123,255,0.3);}
+    .back-button {
+      display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;margin:1.5rem;
+      border:none;border-radius:50px;background:var(--primary-color);color:#FFF;font-weight:bold;
+      cursor:pointer;transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,123,255,0.3);
+    }
     .back-button:hover {transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,123,255,0.4);}
-    .section {margin:1.5rem;padding:1.5rem;background:var(--glass-bg);border:1px solid var(--border-color);
-      border-radius:15px;animation:slideIn 0.4s ease;}
-    .section-title {font-size:1.25rem;margin-bottom:1rem;color:var(--text-light);font-weight:bold;
-      display:flex;align-items:center;justify-content:center;gap:0.5rem;}
-    .download-badge {display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;font-size:0.9rem;
-      background:linear-gradient(45deg,var(--primary-color),var(--secondary-color));border-radius:8px;
-      text-decoration:none;color:#FFF;transition:transform 0.3s ease;}
+    .section {
+      margin:1.5rem;padding:1.5rem;background:var(--glass-bg);border:1px solid var(--border-color);
+      border-radius:15px;animation:slideIn 0.4s ease;
+    }
+    .section-title {
+      font-size:1.25rem;margin-bottom:1rem;color:var(--text-light);font-weight:bold;
+      display:flex;align-items:center;justify-content:center;gap:0.5rem;
+    }
+    .download-badge {
+      display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;font-size:0.9rem;
+      background:linear-gradient(45deg,var(--primary-color),var(--secondary-color));
+      border-radius:8px;text-decoration:none;color:#FFF;transition:transform 0.3s ease;
+    }
     .download-badge:hover {transform:translateY(-2px);}
-    .search-bar {width:80%;padding:0.75rem 1rem;margin:1rem auto;border:1px solid var(--border-color);
-      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);color:var(--text-light);
-      font-size:1rem;font-weight:bold;text-align:center;animation:slideRight 0.4s ease;}
-    .preview-image {width:100%;height:auto;display:block;margin:1rem auto;border-radius:10px;}
-    @media(max-width:768px){.folder-container{border-radius:15px;}.clickable{padding:1rem 1.5rem;}
-      .hidden-section{width:95%;}.preview-image{width:100%;}}
+    .search-bar {
+      width:80%;padding:0.75rem 1rem;margin:1rem auto;border:1px solid var(--border-color);
+      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);
+      color:var(--text-light);font-size:1rem;font-weight:bold;text-align:center;
+      animation:slideRight 0.4s ease;
+    }
+    /* Narrow the search bar in the Android section */
+    #androidSection .search-bar {width:60%;}
+    .preview-image {
+      width:100%;height:auto;display:block;margin:1rem auto;border-radius:10px;
+    }
+    @media(max-width:768px){
+      .folder-container {border-radius:15px;}
+      .clickable {padding:1rem 1.5rem;}
+      .hidden-section {width:95%;}
+      .preview-image {width:100%;}
+    }
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
