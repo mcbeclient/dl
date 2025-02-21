@@ -36,7 +36,12 @@
       to { transform: scale(1); opacity: 1; }
     }
     
-    /* New Animations */
+    /* New fadeIn animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -45,12 +50,6 @@
     @keyframes slideUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* New animation for search bar from left to right */
-    @keyframes slideRight {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
     }
 
     body {
@@ -225,6 +224,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
+      animation: fadeIn 0.4s ease;
     }
 
     /* Download Badge */
@@ -244,7 +244,7 @@
       transform: translateY(-2px);
     }
 
-    /* Search Bar for Dropdown Sections using slideRight animation */
+    /* Search Bar for Dropdown Sections using fadeIn animation */
     .search-bar {
       width: 80%;
       padding: 0.75rem 1rem;
@@ -258,7 +258,7 @@
       font-weight: bold;
       display: block;
       text-align: center;
-      animation: slideRight 0.4s ease;
+      animation: fadeIn 0.4s ease;
     }
 
     /* Preview Image */
