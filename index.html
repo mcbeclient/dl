@@ -51,7 +51,7 @@
       line-height: 1.6;
     }
 
-    /* Enhanced Global Search - sits closer to the top */
+    /* Global Search Bar */
     .global-search-bar {
       width: min(90%, 300px);
       padding: 1rem 1.5rem;
@@ -87,7 +87,7 @@
       transform: scale(1.05);
     }
     
-    /* Lobby Link - enlarged text */
+    /* Lobby Link */
     .lobby-link {
       display: block;
       text-align: center;
@@ -98,7 +98,7 @@
       font-weight: bold;
     }
 
-    /* Improved Folder Design */
+    /* Main Clients Section Container (unchanged) */
     .folder-container {
       background: var(--transparent-bg);
       border: 1px solid var(--border-color);
@@ -121,7 +121,12 @@
       margin: 2rem auto;
       text-align: center;
     }
+    /* Remove focus outline on the container */
+    .hidden-section:focus {
+      outline: none;
+    }
 
+    /* Folder Header (used in main section) */
     .folder-header {
       padding: 1.5rem;
       background: var(--glass-bg);
@@ -133,7 +138,7 @@
       border-bottom: 1px solid var(--border-color);
     }
 
-    /* Enhanced Clickable Items */
+    /* Clickable Items in Main Section */
     .clickable {
       display: flex;
       align-items: center;
@@ -164,7 +169,7 @@
       height: 100%;
     }
 
-    /* Modern Back Button */
+    /* Back Button */
     .back-button {
       display: inline-flex;
       align-items: center;
@@ -185,7 +190,7 @@
       box-shadow: 0 6px 20px rgba(0,123,255,0.4);
     }
 
-    /* Enhanced Section Design */
+    /* Section Box (kept intact inside Android section) */
     .section {
       margin: 1.5rem;
       padding: 1.5rem;
@@ -205,22 +210,7 @@
       gap: 0.5rem;
     }
 
-    /* Restored Progress Bar */
-    .progress-bar {
-      height: 4px;
-      background: var(--glass-bg);
-      border-radius: 2px;
-      overflow: hidden;
-      margin: 1rem 0;
-    }
-    .progress-fill {
-      width: 45%;
-      height: 100%;
-      background: var(--primary-color);
-      transition: width 0.4s ease;
-    }
-
-    /* Adjusted Download Badge */
+    /* Download Badge */
     .download-badge {
       display: inline-flex;
       align-items: center;
@@ -237,7 +227,7 @@
       transform: translateY(-2px);
     }
 
-    /* Styled search bar for dropdown sections */
+    /* Search Bar for Dropdown Sections */
     .search-bar {
       width: 80%;
       padding: 0.75rem 1rem;
@@ -253,7 +243,7 @@
       text-align: center;
     }
 
-    /* Adjusted Preview Image: made a bit larger */
+    /* Preview Image */
     .preview-image {
       width: 100%;
       height: auto;
@@ -281,16 +271,16 @@
   </style>
 </head>
 <body>
-  <!-- Add Font Awesome for icons -->
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <input type="text" class="global-search-bar" placeholder="🔍 Search..." onkeyup="globalSearch(this.value)">
 
-  <!-- Logo is focusable and will be centered on load -->
+  <!-- Logo and Lobby Link -->
   <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
   <a href="https://yashofree.github.io/link/" class="lobby-link">Hub</a>
   
-  <!-- Main Content Section -->
+  <!-- Main Clients Section (Unchanged) -->
   <div class="folder-container" id="mainSection">
     <div class="folder-header"><i class="fas fa-folder-open"></i> Clients</div>
     
@@ -312,18 +302,17 @@
   </div>
 
   <!-- Android Section (Hidden by default) -->
+  <!-- Removed the outer container/outline -->
   <div id="androidSection" class="hidden-section">
-    <!-- Removed container outline by omitting the "folder-container" class and removed the border line -->
-    <div class="folder-header" style="border-bottom: none;">
+    <!-- Redesigned title to look good without an outer container -->
+    <header style="text-align: center; margin: 2rem 0; color: var(--primary-color); font-size: 2rem;">
       <i class="fab fa-android"></i> Android Clients
-    </div>
+    </header>
     <input type="text" class="search-bar" placeholder="🔍 Search...">
     
+    <!-- The inner section box remains intact -->
     <div class="section">
-      <div class="section-title" style="color: #FFFFFF;">
-        Minecraft 1.21.60
-      </div>
-      <!-- Removed the progress bar (the line) -->
+      <div class="section-title" style="color: #FFFFFF;">Minecraft 1.21.60</div>
       <a class="download-badge" href="https://mega.nz/file/PV5jgDQA#GSWqBeOPgzUvGzzEjLgCL3w8H-uyZT9fsGMFlmk9Zeg" target="_blank">
         <i class="fas fa-download"></i> Download APK
       </a>
@@ -350,7 +339,7 @@
       }, 300);
     }
 
-    // When showing a section, scroll so its top aligns with the top of the viewport (lobby out of view)
+    // Show the selected section and hide the main section
     function showSection(sectionId) {
       document.getElementById('mainSection').style.display = "none";
       const sections = document.getElementsByClassName('hidden-section');
@@ -364,7 +353,7 @@
       section.focus();
     }
 
-    // Return to main section and scroll so it’s fully visible
+    // Return to the main section
     function goBack() {
       const sections = document.getElementsByClassName('hidden-section');
       for (let i = 0; i < sections.length; i++) {
@@ -374,7 +363,7 @@
       document.getElementById('mainSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // On page load, set focus to the logo
+    // Set focus to the logo on page load
     window.onload = function() {
       const logo = document.querySelector('.logo');
       if (logo) {
