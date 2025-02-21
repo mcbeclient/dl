@@ -6,7 +6,7 @@
   <title>Yasho Hub</title>
   <style>
     :root {
-      --primary-color: #007BFF;
+      --primary-color: #007BFF; /* Used for other elements like borders */
       --secondary-color: #0056b3;
       --accent-color: #1E90FF;
       --background-dark: #0F0F1E;
@@ -91,14 +91,20 @@
     .logo:hover {
       transform: scale(1.05);
     }
+    /* Ensure the logo's outline stays blue on focus */
+    .logo:focus {
+      outline: none;
+      border: 3px solid var(--primary-color);
+    }
     .lobby-link {
       display: block;
       text-align: center;
       margin-bottom: 1rem;
-      color: var(--primary-color);
       text-decoration: none;
       font-size: 1.5rem;
       font-weight: bold;
+      color: #00c3ff;
+      text-shadow: 0 0 10px rgba(0,195,255,0.5);
     }
     .folder-container {
       background: var(--transparent-bg);
@@ -130,8 +136,14 @@
       font-weight: 700;
       text-align: center;
       position: relative;
-      color: var(--primary-color);
+      /* Updated inline headers in hidden sections will override this */
+      color: var(--text-light);
       border-bottom: 1px solid var(--border-color);
+    }
+    /* Updated clickable items */
+    .folder-container .clickable {
+      color: #00c3ff;
+      text-shadow: 0 0 10px rgba(0,195,255,0.5);
     }
     .clickable {
       display: flex;
@@ -139,7 +151,6 @@
       justify-content: center;
       gap: 1rem;
       padding: 1.25rem 2rem;
-      color: var(--text-light);
       font-weight: bold;
       transition: all 0.3s ease;
       position: relative;
@@ -235,7 +246,6 @@
       margin: 1rem auto;
       border-radius: 10px;
     }
-    /* Mobile view adjustments */
     @media(max-width:768px){
       .folder-container {
         border-radius: 15px;
@@ -246,34 +256,49 @@
       .hidden-section {
         width: 98%;
       }
-      /* Adjust Minecraft box for mobile view */
-      #androidSection .section {
+      #androidSection .section,
+      #packSection .section,
+      #windowsSection .section,
+      #iosSection .section {
         margin: 1rem auto;
         padding: 0.5rem;
       }
-      #androidSection .section .preview-image {
+      #androidSection .section .preview-image,
+      #packSection .section .preview-image,
+      #windowsSection .section .preview-image,
+      #iosSection .section .preview-image {
         width: calc(100% + 1rem);
         margin-left: -0.5rem;
         margin-right: -0.5rem;
         margin-bottom: -0.5rem;
       }
-      #androidSection .search-bar {
+      #androidSection .search-bar,
+      #packSection .search-bar,
+      #windowsSection .search-bar,
+      #iosSection .search-bar {
         width: 60%;
       }
     }
-    /* PC view adjustments */
     @media(min-width:769px){
-      /* Adjust Minecraft box for PC view */
-      #androidSection .section {
+      #androidSection .section,
+      #packSection .section,
+      #windowsSection .section,
+      #iosSection .section {
         padding: 0.5rem;
       }
-      #androidSection .section .preview-image {
+      #androidSection .section .preview-image,
+      #packSection .section .preview-image,
+      #windowsSection .section .preview-image,
+      #iosSection .section .preview-image {
         width: calc(100% + 1rem);
         margin-left: -0.5rem;
         margin-right: -0.5rem;
         margin-bottom: -0.5rem;
       }
-      #androidSection .search-bar {
+      #androidSection .search-bar,
+      #packSection .search-bar,
+      #windowsSection .search-bar,
+      #iosSection .search-bar {
         width: 60%;
       }
     }
@@ -292,49 +317,165 @@
   <a href="https://yashofree.github.io/link/" class="lobby-link">Hub</a>
   <div class="folder-container" id="mainSection">
     <div class="folder-header"><i class="fas fa-folder-open"></i> Clients</div>
-    <div class="clickable" onclick="showSection('packSection')"><i class="fas fa-cube"></i> Pack</div>
-    <div class="clickable" onclick="showSection('androidSection')"><i class="fab fa-android"></i> Android</div>
-    <div class="clickable" onclick="showSection('windowsSection')"><i class="fab fa-windows"></i> Windows</div>
-    <div class="clickable" onclick="showSection('iosSection')"><i class="fab fa-apple"></i> iOS</div>
+    <div class="clickable" onclick="showSection('packSection')">
+      <i class="fas fa-cube"></i> Pack
+    </div>
+    <div class="clickable" onclick="showSection('androidSection')">
+      <i class="fab fa-android"></i> Android
+    </div>
+    <div class="clickable" onclick="showSection('windowsSection')">
+      <i class="fab fa-windows"></i> Windows
+    </div>
+    <div class="clickable" onclick="showSection('iosSection')">
+      <i class="fab fa-apple"></i> iOS
+    </div>
   </div>
-  <div id="androidSection" class="hidden-section">
-    <header style="text-align: center; margin: 2rem 0; color: var(--primary-color); font-size: 2rem; animation: slideDown 0.5s ease-out;">
-      <i class="fab fa-android"></i><br>Android Clients
+  
+  <!-- Hidden sections -->
+  <div id="packSection" class="hidden-section">
+    <header style="text-align: center; margin: 2rem 0; color: #00c3ff; text-shadow: 0 0 10px rgba(0,195,255,0.5); font-size: 2rem; animation: slideDown 0.5s ease-out;">
+      <i class="fas fa-cube"></i><br>Pack Clients
     </header>
     <input type="text" class="search-bar" placeholder="🔍 Search...">
     <div class="section">
-      <div class="section-title" style="color: #FFF;">Minecraft 1.21.60</div>
-      <a class="download-badge" href="https://mega.nz/file/PV5jgDQA#GSWqBeOPgzUvGzzEjLgCL3w8H-uyZT9fsGMFlmk9Zeg" target="_blank">
-        <i class="fas fa-download"></i> Download APK
+      <div class="section-title">Bedezu Client v7.1</div>
+      <a class="download-badge" href="https://www.mediafire.com/file/sk2wprcjs38zir5/Bedezu_Client_v7.1.mcpack/file" target="_blank">
+        <i class="fas fa-download"></i> Download Pack
       </a>
-      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" alt="Minecraft Patched 1.21.60" loading="lazy" class="preview-image">
+      <img src="https://www.9minecraft.net/wp-content/uploads/2022/07/Logo-Bedezu-Client-01.jpg" alt="Minecraft 1.21.60" loading="lazy" class="preview-image">
+    </div>
+    <div class="section">
+      <div class="section-title">CM Client v3</div>
+      <a class="download-badge" href="https://www.mediafire.com/file/tstm5ti8i6c7mwk/CM_Client_v3.mcpack/file" target="_blank">
+        <i class="fas fa-download"></i> Download Pack
+      </a>
+      <img src="https://img.youtube.com/vi/zBGS9OWXX44/maxresdefault.jpg" alt="Minecraft 1.21.60" loading="lazy" class="preview-image">
     </div>
     <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
       <i class="fas fa-arrow-left"></i> Back to Main
     </button>
   </div>
+  
+  <div id="androidSection" class="hidden-section">
+    <header style="text-align: center; margin: 2rem 0; color: #00c3ff; text-shadow: 0 0 10px rgba(0,195,255,0.5); font-size: 2rem; animation: slideDown 0.5s ease-out;">
+      <i class="fab fa-android"></i><br>Android Clients
+    </header>
+    <input type="text" class="search-bar" placeholder="🔍 Search...">
+    <div class="section">
+      <div class="section-title">Minecraft 1.21.60</div>
+      <a class="download-badge" href="https://mega.nz/file/PV5jgDQA#GSWqBeOPgzUvGzzEjLgCL3w8H-uyZT9fsGMFlmk9Zeg" target="_blank">
+        <i class="fas fa-download"></i> Download APK
+      </a>
+      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" alt="Minecraft 1.21.60" loading="lazy" class="preview-image">
+    </div>
+    <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
+      <i class="fas fa-arrow-left"></i> Back to Main
+    </button>
+  </div>
+  
+  <div id="windowsSection" class="hidden-section">
+    <header style="text-align: center; margin: 2rem 0; color: #00c3ff; text-shadow: 0 0 10px rgba(0,195,255,0.5); font-size: 2rem; animation: slideDown 0.5s ease-out;">
+      <i class="fab fa-windows"></i><br>Windows Clients
+    </header>
+    <input type="text" class="search-bar" placeholder="🔍 Search...">
+    <div class="section">
+      <div class="section-title">Minecraft 1.21.60</div>
+      <a class="download-badge" href="https://example.com/windows-download" target="_blank">
+        <i class="fas fa-download"></i> Download for Windows
+      </a>
+      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" alt="Minecraft 1.21.60" loading="lazy" class="preview-image">
+    </div>
+    <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
+      <i class="fas fa-arrow-left"></i> Back to Main
+    </button>
+  </div>
+  
+  <div id="iosSection" class="hidden-section">
+    <header style="text-align: center; margin: 2rem 0; color: #00c3ff; text-shadow: 0 0 10px rgba(0,195,255,0.5); font-size: 2rem; animation: slideDown 0.5s ease-out;">
+      <i class="fab fa-apple"></i><br>iOS Clients
+    </header>
+    <input type="text" class="search-bar" placeholder="🔍 Search...">
+    <div class="section">
+      <div class="section-title">Minecraft 1.21.60</div>
+      <a class="download-badge" href="https://example.com/ios-download" target="_blank">
+        <i class="fas fa-download"></i> Download for iOS
+      </a>
+      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" alt="Minecraft 1.21.60" loading="lazy" class="preview-image">
+    </div>
+    <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
+      <i class="fas fa-arrow-left"></i> Back to Main
+    </button>
+  </div>
+  
   <script>
     let searchTimeout;
     function globalSearch(query) {
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
         const normalizedQuery = query.toLowerCase().trim();
+        const mainSection = document.getElementById('mainSection');
+        const hiddenSections = document.getElementsByClassName('hidden-section');
+        let anyCardVisible = false;
+        
+        if (normalizedQuery === '') {
+          // Reset view: show mainSection and all cards in each hidden section
+          mainSection.style.display = "block";
+          Array.from(hiddenSections).forEach(container => {
+            container.style.display = "none";
+            const cards = container.querySelectorAll('.section');
+            cards.forEach(card => {
+              card.style.display = "block";
+            });
+          });
+          const noResultsElem = document.getElementById('noResults');
+          if (noResultsElem) noResultsElem.remove();
+        } else {
+          mainSection.style.display = "none";
+          Array.from(hiddenSections).forEach(container => {
+            let containerHasVisible = false;
+            const cards = container.querySelectorAll('.section');
+            cards.forEach(card => {
+              if (card.textContent.toLowerCase().includes(normalizedQuery)) {
+                card.style.display = "block";
+                containerHasVisible = true;
+                anyCardVisible = true;
+              } else {
+                card.style.display = "none";
+              }
+            });
+            container.style.display = containerHasVisible ? "block" : "none";
+          });
+          let noResultsElem = document.getElementById('noResults');
+          if (!anyCardVisible) {
+            if (!noResultsElem) {
+              noResultsElem = document.createElement('div');
+              noResultsElem.id = 'noResults';
+              noResultsElem.textContent = 'No results found.';
+              noResultsElem.style.color = 'var(--text-dim)';
+              noResultsElem.style.textAlign = 'center';
+              noResultsElem.style.marginTop = '1rem';
+              mainSection.parentNode.insertBefore(noResultsElem, mainSection.nextSibling);
+            }
+          } else if (noResultsElem) {
+            noResultsElem.remove();
+          }
+        }
       }, 300);
     }
     function showSection(sectionId) {
       document.getElementById('mainSection').style.display = "none";
-      let sections = document.getElementsByClassName('hidden-section');
+      const sections = document.getElementsByClassName('hidden-section');
       for (let i = 0; i < sections.length; i++) {
         sections[i].style.display = "none";
       }
-      let section = document.getElementById(sectionId);
+      const section = document.getElementById(sectionId);
       section.style.display = "block";
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
       section.setAttribute('tabindex', '-1');
       section.focus();
     }
     function goBack() {
-      let sections = document.getElementsByClassName('hidden-section');
+      const sections = document.getElementsByClassName('hidden-section');
       for (let i = 0; i < sections.length; i++) {
         sections[i].style.display = "none";
       }
@@ -342,7 +483,7 @@
       document.getElementById('mainSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
     window.onload = function() {
-      let logo = document.querySelector('.logo');
+      const logo = document.querySelector('.logo');
       if (logo) {
         logo.scrollIntoView({ behavior: 'smooth', block: 'center' });
         logo.focus();
