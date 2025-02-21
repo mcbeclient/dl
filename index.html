@@ -6,395 +6,117 @@
   <title>Yasho Hub</title>
   <style>
     :root {
-      --primary-color: #007BFF;
-      --secondary-color: #0056b3;
-      --accent-color: #1E90FF;
-      --background-dark: #0F0F1E;
-      --background-darker: #1A1A2F;
-      --background-gray: #2D2D4D;
-      --text-light: #FFFFFF;
-      --text-dim: #B0B0FF;
-      --transparent-bg: rgba(26, 26, 47, 0.9);
-      --border-color: rgba(0, 123, 255, 0.2);
-      --glass-bg: rgba(0, 123, 255, 0.05);
-      --section-spacing: 2rem;
+      --primary-color:#007BFF;--secondary-color:#0056b3;--accent-color:#1E90FF;
+      --background-dark:#0F0F1E;--background-darker:#1A1A2F;--background-gray:#2D2D4D;
+      --text-light:#FFF;--text-dim:#B0B0FF;--transparent-bg:rgba(26,26,47,0.9);
+      --border-color:rgba(0,123,255,0.2);--glass-bg:rgba(0,123,255,0.05);--section-spacing:2rem;
     }
-
-    @keyframes floatNoSpin {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-      100% { transform: translateY(0); }
-    }
-
-    @keyframes slideIn {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    
-    @keyframes scaleUp {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
-    }
-    
-    /* New Animations */
-    @keyframes slideDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes slideUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* New animation for search bar from left to right */
-    @keyframes slideRight {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: calc(2rem + env(safe-area-inset-top)) 2rem 2rem 2rem;
-      background: linear-gradient(45deg, var(--background-dark), var(--background-darker), var(--background-gray));
-      background-size: 400% 400%;
-      animation: gradientBG 15s ease infinite;
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    /* Global Search Bar */
-    .global-search-bar {
-      width: min(90%, 300px);
-      padding: 1rem 1.5rem;
-      margin: 1rem 0;
-      border: 1px solid var(--border-color);
-      border-radius: 50px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      color: var(--text-light);
-      font-size: 1rem;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      box-sizing: border-box;
-    }
-    .global-search-bar:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 15px rgba(0,123,255,0.2);
-    }
-	  
-    .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      margin: 2rem 0;
-      border: 3px solid var(--primary-color);
-      box-shadow: 0 0 30px rgba(0,123,255,0.3);
-      animation: floatNoSpin 4s ease-in-out infinite;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover {
-      transform: scale(1.05);
-    }
-    
-    /* Lobby Link */
-    .lobby-link {
-      display: block;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-      text-decoration: none;
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    /* Main Clients Section Container (unchanged) */
-    .folder-container {
-      background: var(--transparent-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      overflow: hidden;
-      animation: scaleUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    }
-
-    /* Main section and hidden sections */
-    #mainSection {
-      width: min(90%, 300px);
-      margin: 1rem auto;
-      text-align: center;
-    }
-    .hidden-section {
-      display: none;
-      width: min(90%, 450px);
-      margin: 2rem auto;
-      text-align: center;
-    }
-    /* Remove focus outline on the container */
-    .hidden-section:focus {
-      outline: none;
-    }
-
-    /* Folder Header (used in main section) */
-    .folder-header {
-      padding: 1.5rem;
-      background: var(--glass-bg);
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-align: center;
-      position: relative;
-      color: var(--primary-color);
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    /* Clickable Items in Main Section */
-    .clickable {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1.25rem 2rem;
-      color: var(--text-light);
-      font-weight: bold;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .clickable::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      width: 3px;
-      height: 0%;
-      background: var(--primary-color);
-      transition: height 0.3s ease;
-    }
-    .clickable:hover {
-      background: var(--glass-bg);
-      padding-left: 2.5rem;
-    }
-    .clickable:hover::before {
-      height: 100%;
-    }
-
-    /* Back Button */
-    .back-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.5rem;
-      margin: 1.5rem;
-      border: none;
-      border-radius: 50px;
-      background: var(--primary-color);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0,123,255,0.3);
-    }
-    .back-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,123,255,0.4);
-    }
-
-    /* Section Box (kept intact inside Android section) */
-    .section {
-      margin: 1.5rem;
-      padding: 1.5rem;
-      background: var(--glass-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 15px;
-      animation: slideIn 0.4s ease;
-    }
-    .section-title {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-      color: var(--text-light);
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-    }
-
-    /* Download Badge */
-    .download-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-      background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-      border-radius: 8px;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s ease;
-    }
-    .download-badge:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Search Bar for Dropdown Sections using slideRight animation */
-    .search-bar {
-      width: 80%;
-      padding: 0.75rem 1rem;
-      margin: 1rem auto;
-      border: 1px solid var(--border-color);
-      border-radius: 50px;
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      color: var(--text-light);
-      font-size: 1rem;
-      font-weight: bold;
-      display: block;
-      text-align: center;
-      animation: slideRight 0.4s ease;
-    }
-
-    /* Preview Image */
-    .preview-image {
-      width: 100%;
-      height: auto;
-      display: block;
-      margin: 1rem auto;
-      border-radius: 10px;
-    }
-
-    /* Mobile Optimization: Increase width of Android section and image view */
-    @media (max-width: 768px) {
-      .folder-container {
-        border-radius: 15px;
-      }
-      .clickable {
-        padding: 1rem 1.5rem;
-      }
-      .hidden-section {
-        width: 95%;
-      }
-      .preview-image {
-        width: 100%;
-      }
-    }
-    /* Reduced Motion */
-    @media (prefers-reduced-motion: reduce) {
-      * {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
+    @keyframes floatNoSpin {0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);}}
+    @keyframes slideIn {from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+    @keyframes scaleUp {from{transform:scale(0.95);opacity:0;}to{transform:scale(1);opacity:1;}}
+    @keyframes slideDown {from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes slideUp {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes slideRight {from{opacity:0;transform:translateX(-30px);}to{opacity:1;transform:translateX(0);}}
+    body {font-family:'Inter',system-ui,-apple-system,sans-serif;display:flex;flex-direction:column;
+      align-items:center;min-height:100vh;margin:0;padding:calc(2rem+env(safe-area-inset-top)) 2rem 2rem;
+      background:linear-gradient(45deg,var(--background-dark),var(--background-darker),var(--background-gray));
+      background-size:400% 400%;animation:gradientBG 15s ease infinite;color:var(--text-light);line-height:1.6;}
+    .global-search-bar {width:min(90%,300px);padding:1rem 1.5rem;margin:1rem 0;border:1px solid var(--border-color);
+      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);color:var(--text-light);
+      font-size:1rem;font-weight:bold;transition:all 0.3s ease;box-shadow:0 4px 20px rgba(0,0,0,0.1);box-sizing:border-box;}
+    .global-search-bar:focus {outline:none;border-color:var(--primary-color);box-shadow:0 0 15px rgba(0,123,255,0.2);}
+    .logo {width:120px;height:120px;border-radius:50%;margin:2rem 0;border:3px solid var(--primary-color);
+      box-shadow:0 0 30px rgba(0,123,255,0.3);animation:floatNoSpin 4s ease-in-out infinite;transition:transform 0.3s ease;}
+    .logo:hover {transform:scale(1.05);}
+    .lobby-link {display:block;text-align:center;margin-bottom:1rem;color:var(--primary-color);
+      text-decoration:none;font-size:1.5rem;font-weight:bold;}
+    .folder-container {background:var(--transparent-bg);border:1px solid var(--border-color);
+      border-radius:20px;backdrop-filter:blur(10px);box-shadow:0 8px 32px rgba(0,0,0,0.1);overflow:hidden;
+      animation:scaleUp 0.6s cubic-bezier(0.23,1,0.32,1);}
+    #mainSection {width:min(90%,300px);margin:1rem auto;text-align:center;}
+    .hidden-section {display:none;width:min(90%,450px);margin:2rem auto;text-align:center;}
+    .hidden-section:focus {outline:none;}
+    .folder-header {padding:1.5rem;background:var(--glass-bg);font-size:1.5rem;font-weight:700;
+      text-align:center;position:relative;color:var(--primary-color);border-bottom:1px solid var(--border-color);}
+    .clickable {display:flex;align-items:center;justify-content:center;gap:1rem;padding:1.25rem 2rem;
+      color:var(--text-light);font-weight:bold;transition:all 0.3s ease;position:relative;overflow:hidden;cursor:pointer;}
+    .clickable::before {content:'';position:absolute;left:0;width:3px;height:0;background:var(--primary-color);
+      transition:height 0.3s ease;}
+    .clickable:hover {background:var(--glass-bg);padding-left:2.5rem;}
+    .clickable:hover::before {height:100%;}
+    .back-button {display:inline-flex;align-items:center;gap:0.5rem;padding:0.8rem 1.5rem;margin:1.5rem;
+      border:none;border-radius:50px;background:var(--primary-color);color:#FFF;font-weight:bold;cursor:pointer;
+      transition:all 0.3s ease;box-shadow:0 4px 15px rgba(0,123,255,0.3);}
+    .back-button:hover {transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,123,255,0.4);}
+    .section {margin:1.5rem;padding:1.5rem;background:var(--glass-bg);border:1px solid var(--border-color);
+      border-radius:15px;animation:slideIn 0.4s ease;}
+    .section-title {font-size:1.25rem;margin-bottom:1rem;color:var(--text-light);font-weight:bold;
+      display:flex;align-items:center;justify-content:center;gap:0.5rem;}
+    .download-badge {display:inline-flex;align-items:center;gap:0.5rem;padding:0.5rem 1rem;font-size:0.9rem;
+      background:linear-gradient(45deg,var(--primary-color),var(--secondary-color));border-radius:8px;
+      text-decoration:none;color:#FFF;transition:transform 0.3s ease;}
+    .download-badge:hover {transform:translateY(-2px);}
+    .search-bar {width:80%;padding:0.75rem 1rem;margin:1rem auto;border:1px solid var(--border-color);
+      border-radius:50px;background:var(--glass-bg);backdrop-filter:blur(10px);color:var(--text-light);
+      font-size:1rem;font-weight:bold;text-align:center;animation:slideRight 0.4s ease;}
+    .preview-image {width:100%;height:auto;display:block;margin:1rem auto;border-radius:10px;}
+    @media(max-width:768px){.folder-container{border-radius:15px;}.clickable{padding:1rem 1.5rem;}
+      .hidden-section{width:95%;}.preview-image{width:100%;}}
+    @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
   </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
   <input type="text" class="global-search-bar" placeholder="🔍 Search..." onkeyup="globalSearch(this.value)">
-
-  <!-- Logo and Lobby Link -->
   <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
   <a href="https://yashofree.github.io/link/" class="lobby-link">Hub</a>
-  
-  <!-- Main Clients Section (Unchanged) -->
   <div class="folder-container" id="mainSection">
     <div class="folder-header"><i class="fas fa-folder-open"></i> Clients</div>
-    
-    <div class="clickable" onclick="showSection('packSection')">
-      <i class="fas fa-cube"></i> Pack
-    </div>
-    
-    <div class="clickable" onclick="showSection('androidSection')">
-      <i class="fab fa-android"></i> Android
-    </div>
-	
-    <div class="clickable" onclick="showSection('windowsSection')">
-      <i class="fab fa-windows"></i> Windows
-    </div>
-    
-    <div class="clickable" onclick="showSection('iosSection')">
-      <i class="fab fa-apple"></i> iOS
-    </div>
+    <div class="clickable" onclick="showSection('packSection')"><i class="fas fa-cube"></i> Pack</div>
+    <div class="clickable" onclick="showSection('androidSection')"><i class="fab fa-android"></i> Android</div>
+    <div class="clickable" onclick="showSection('windowsSection')"><i class="fab fa-windows"></i> Windows</div>
+    <div class="clickable" onclick="showSection('iosSection')"><i class="fab fa-apple"></i> iOS</div>
   </div>
-
-  <!-- Android Section (Hidden by default) -->
-  <!-- Outer container removed so that only the inner boxes remain -->
   <div id="androidSection" class="hidden-section">
-    <!-- Header with slideDown animation -->
-    <header style="text-align: center; margin: 2rem 0; color: var(--primary-color); font-size: 2rem; animation: slideDown 0.5s ease-out;">
-      <i class="fab fa-android"></i> Android Clients
+    <header style="text-align:center;margin:2rem 0;color:var(--primary-color);font-size:2rem;animation:slideDown 0.5s ease-out;">
+      <i class="fab fa-android"></i><br>Android Clients
     </header>
     <input type="text" class="search-bar" placeholder="🔍 Search...">
-    
-    <!-- The inner section box remains intact -->
     <div class="section">
-      <div class="section-title" style="color: #FFFFFF;">Minecraft 1.21.60</div>
+      <div class="section-title" style="color:#FFF;">Minecraft 1.21.60</div>
       <a class="download-badge" href="https://mega.nz/file/PV5jgDQA#GSWqBeOPgzUvGzzEjLgCL3w8H-uyZT9fsGMFlmk9Zeg" target="_blank">
         <i class="fas fa-download"></i> Download APK
       </a>
-      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" 
-           alt="Minecraft Patched 1.21.60" 
-           loading="lazy"
-           class="preview-image">
+      <img src="https://d1wzdj81h1hubn.cloudfront.net/resources/6705a242a5bfd03f.jpeg" alt="Minecraft Patched 1.21.60" loading="lazy" class="preview-image">
     </div>
-    
-    <!-- Back Button with slideUp animation -->
-    <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
+    <button class="back-button" onclick="goBack()" style="animation:slideUp 0.5s ease-out;">
       <i class="fas fa-arrow-left"></i> Back to Main
     </button>
   </div>
-
-  <!-- Additional sections (packSection, windowsSection, iosSection) can be added similarly -->
-
   <script>
     let searchTimeout;
     function globalSearch(query) {
       clearTimeout(searchTimeout);
-      searchTimeout = setTimeout(() => {
-        const normalizedQuery = query.toLowerCase().trim();
-        // Search implementation here
-      }, 300);
+      searchTimeout = setTimeout(() => { const normalizedQuery = query.toLowerCase().trim(); }, 300);
     }
-
-    // Show the selected section and hide the main section
     function showSection(sectionId) {
       document.getElementById('mainSection').style.display = "none";
-      const sections = document.getElementsByClassName('hidden-section');
-      for (let i = 0; i < sections.length; i++) {
-        sections[i].style.display = "none";
-      }
-      const section = document.getElementById(sectionId);
+      let sections = document.getElementsByClassName('hidden-section');
+      for (let i = 0; i < sections.length; i++) sections[i].style.display = "none";
+      let section = document.getElementById(sectionId);
       section.style.display = "block";
       section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      section.setAttribute('tabindex', '-1');
-      section.focus();
+      section.setAttribute('tabindex', '-1'); section.focus();
     }
-
-    // Return to the main section
     function goBack() {
-      const sections = document.getElementsByClassName('hidden-section');
-      for (let i = 0; i < sections.length; i++) {
-        sections[i].style.display = "none";
-      }
+      let sections = document.getElementsByClassName('hidden-section');
+      for (let i = 0; i < sections.length; i++) sections[i].style.display = "none";
       document.getElementById('mainSection').style.display = "block";
       document.getElementById('mainSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
-
-    // Set focus to the logo on page load
     window.onload = function() {
-      const logo = document.querySelector('.logo');
-      if (logo) {
-         logo.scrollIntoView({ behavior: 'smooth', block: 'center' });
-         logo.focus();
-      }
+      let logo = document.querySelector('.logo');
+      if (logo) { logo.scrollIntoView({ behavior: 'smooth', block: 'center' }); logo.focus(); }
     }
   </script>
 </body>
