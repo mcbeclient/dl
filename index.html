@@ -96,6 +96,7 @@
       font-weight: bold;
     }
 
+    /* Desktop styling for content boxes */
     .folder-container {
       background: var(--transparent-bg);
       border: 1px solid var(--border-color);
@@ -107,8 +108,10 @@
       width: 90%;
       max-width: 450px;
       margin: 1rem auto;
+      padding: 0; /* default padding handled inside */
     }
 
+    /* Main section remains as-is */
     #mainSection {
       text-align: center;
     }
@@ -252,28 +255,33 @@
       border-radius: 10px;
     }
 
-    /* Responsive adjustments */
+    /* Mobile-specific adjustments */
     @media (max-width: 768px) {
       .folder-container {
-        border-radius: 15px;
-        margin: 1rem;
-      }
-      .clickable {
-        padding: 1rem 1.5rem;
+        /* Leave styling for main menu boxes but override for Android section below */
       }
       /* Increase logo size on mobile */
       .logo {
         width: 150px;
         height: 150px;
       }
-      /* Ensure the preview image fills the available space */
-      .preview-image {
-        width: 100%;
-        max-width: none;
-      }
-      /* Adjust global search bar for smaller screens */
       .global-search-bar {
         width: 95%;
+      }
+      /* Remove the box styling for the Android section */
+      #androidSection {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 1rem;
+      }
+      /* Also simplify the header for Android Clients on mobile */
+      #androidSection .folder-header {
+        background: transparent;
+        border: none;
+        padding: 1rem 0;
       }
     }
 
