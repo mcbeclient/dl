@@ -35,6 +35,23 @@
       from { transform: scale(0.95); opacity: 0; }
       to { transform: scale(1); opacity: 1; }
     }
+    
+    /* New Animations */
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* New animation for search bar from left to right */
+    @keyframes slideRight {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -227,7 +244,7 @@
       transform: translateY(-2px);
     }
 
-    /* Search Bar for Dropdown Sections */
+    /* Search Bar for Dropdown Sections using slideRight animation */
     .search-bar {
       width: 80%;
       padding: 0.75rem 1rem;
@@ -241,6 +258,7 @@
       font-weight: bold;
       display: block;
       text-align: center;
+      animation: slideRight 0.4s ease;
     }
 
     /* Preview Image */
@@ -252,13 +270,19 @@
       border-radius: 10px;
     }
 
-    /* Mobile Optimization */
+    /* Mobile Optimization: Increase width of Android section and image view */
     @media (max-width: 768px) {
       .folder-container {
         border-radius: 15px;
       }
       .clickable {
         padding: 1rem 1.5rem;
+      }
+      .hidden-section {
+        width: 95%;
+      }
+      .preview-image {
+        width: 100%;
       }
     }
     /* Reduced Motion */
@@ -302,10 +326,10 @@
   </div>
 
   <!-- Android Section (Hidden by default) -->
-  <!-- Removed the outer container/outline -->
+  <!-- Outer container removed so that only the inner boxes remain -->
   <div id="androidSection" class="hidden-section">
-    <!-- Redesigned title to look good without an outer container -->
-    <header style="text-align: center; margin: 2rem 0; color: var(--primary-color); font-size: 2rem;">
+    <!-- Header with slideDown animation -->
+    <header style="text-align: center; margin: 2rem 0; color: var(--primary-color); font-size: 2rem; animation: slideDown 0.5s ease-out;">
       <i class="fab fa-android"></i> Android Clients
     </header>
     <input type="text" class="search-bar" placeholder="🔍 Search...">
@@ -322,7 +346,8 @@
            class="preview-image">
     </div>
     
-    <button class="back-button" onclick="goBack()">
+    <!-- Back Button with slideUp animation -->
+    <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
       <i class="fas fa-arrow-left"></i> Back to Main
     </button>
   </div>
