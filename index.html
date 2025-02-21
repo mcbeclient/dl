@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yasho Hub</title>
+  <title>Clients</title>
   <style>
     :root {
       --primary-color: #007BFF; /* Used for other elements like borders */
@@ -58,9 +58,10 @@
       color: var(--text-light);
       line-height: 1.6;
     }
+    /* Additional background style if bg folder images exist will be applied via JavaScript */
     .global-search-bar {
       width: min(90%, 250px);
-      padding: 1rem 1.5rem;
+      padding: 0.5rem 1.5rem; /* Reduced vertical padding */
       margin: 1rem 0;
       border: 1px solid var(--border-color);
       border-radius: 50px;
@@ -136,15 +137,10 @@
       font-weight: 700;
       text-align: center;
       position: relative;
-      /* Updated inline headers in hidden sections will override this */
       color: var(--text-light);
       border-bottom: 1px solid var(--border-color);
     }
-    /* Updated clickable items */
-    .folder-container .clickable {
-      color: #00c3ff;
-      text-shadow: 0 0 10px rgba(0,195,255,0.5);
-    }
+    /* Smooth edged boxes for clickable items */
     .clickable {
       display: flex;
       align-items: center;
@@ -156,6 +152,9 @@
       position: relative;
       overflow: hidden;
       cursor: pointer;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      margin: 0.5rem;
     }
     .clickable::before {
       content: '';
@@ -314,7 +313,7 @@
 <body>
   <input type="text" class="global-search-bar" placeholder="🔍 Search..." onkeyup="globalSearch(this.value)">
   <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
-  <a href="https://yashofree.github.io/link/" class="lobby-link">Hub</a>
+  <a href="https://yashofree.github.io/link/" class="lobby-link">Home</a>
   <div class="folder-container" id="mainSection">
     <div class="folder-header"><i class="fas fa-folder-open"></i> Clients</div>
     <div class="clickable" onclick="showSection('packSection')">
@@ -482,13 +481,36 @@
       document.getElementById('mainSection').style.display = "block";
       document.getElementById('mainSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
+    
+    // Function to update background if images exist in the "bg" folder
+    function updateBackground() {
+      let bgImage = new Image();
+      let imageUrl = '';
+      if(window.innerWidth > 768) {
+        imageUrl = 'bg/pc.jpg';
+      } else {
+        imageUrl = 'bg/cp.jpg';
+      }
+      bgImage.onload = function() {
+        // If image loads successfully, update background
+        document.body.style.background = `url(${imageUrl}) no-repeat center center fixed`;
+        document.body.style.backgroundSize = "cover";
+      }
+      bgImage.onerror = function() {
+        // If image not found, keep original background
+      }
+      bgImage.src = imageUrl;
+    }
+    
     window.onload = function() {
       const logo = document.querySelector('.logo');
       if (logo) {
         logo.scrollIntoView({ behavior: 'smooth', block: 'center' });
         logo.focus();
       }
+      updateBackground();
     }
+    window.addEventListener("resize", updateBackground);
   </script>
 </body>
 </html>
