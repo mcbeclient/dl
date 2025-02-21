@@ -71,10 +71,28 @@
         margin-left: -1.5rem;
         margin-right: -1.5rem;
       }
-      /* Increase the Minecraft 1.21.60 box size */
+      /* Increase the Minecraft 1.21.60 box size in mobile view */
       #androidSection .section {
         margin: 1rem auto;
         padding: 2rem;
+      }
+    }
+    @media(min-width:769px){
+      /* Adjust Minecraft 1.21.60 box for PC view */
+      #androidSection .section {
+          padding: 0.5rem 1.5rem 1.5rem 1.5rem; /* less top padding for title */
+      }
+      #androidSection .section .section-title {
+          margin-top: 0;
+      }
+      #androidSection .section .preview-image {
+          width: calc(100% + 3rem);
+          margin-left: -1.5rem;
+          margin-right: -1.5rem;
+          margin-bottom: -1.5rem;
+      }
+      #androidSection .search-bar {
+          width: 60%;
       }
     }
     @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;}}
