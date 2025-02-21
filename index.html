@@ -21,18 +21,11 @@
     }
 
     @keyframes floatNoSpin {
-      0% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-      100% {
-        transform: translateY(0);
-      }
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
 
-	    
     @keyframes slideIn {
       from { opacity: 0; transform: translateX(20px); }
       to { opacity: 1; transform: translateX(0); }
@@ -58,7 +51,6 @@
       line-height: 1.6;
     }
 
-    /* Enhanced Global Search - sits closer to the top */
     .global-search-bar {
       width: min(90%, 300px);
       padding: 1rem 1.5rem;
@@ -88,14 +80,12 @@
       border: 3px solid var(--primary-color);
       box-shadow: 0 0 30px rgba(0,123,255,0.3);
       animation: floatNoSpin 4s ease-in-out infinite;
-      transition: transform 0.3s ease;}
-
+      transition: transform 0.3s ease;
     }
     .logo:hover {
       transform: scale(1.05);
     }
     
-    /* Lobby Link - enlarged text */
     .lobby-link {
       display: block;
       text-align: center;
@@ -106,7 +96,6 @@
       font-weight: bold;
     }
 
-    /* Improved Folder Design */
     .folder-container {
       background: var(--transparent-bg);
       border: 1px solid var(--border-color);
@@ -115,19 +104,20 @@
       box-shadow: 0 8px 32px rgba(0,0,0,0.1);
       overflow: hidden;
       animation: scaleUp 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      width: 90%;
+      max-width: 450px;
+      margin: 1rem auto;
     }
 
-    /* Main section and hidden sections */
     #mainSection {
-      width: min(90%, 300px);
-      margin: 1rem auto;
       text-align: center;
     }
     .hidden-section {
       display: none;
-      width: min(90%, 450px);
-      margin: 2rem auto;
       text-align: center;
+      width: 90%;
+      max-width: 450px;
+      margin: 2rem auto;
     }
 
     .folder-header {
@@ -136,12 +126,10 @@
       font-size: 1.5rem;
       font-weight: 700;
       text-align: center;
-      position: relative;
       color: var(--primary-color);
       border-bottom: 1px solid var(--border-color);
     }
 
-    /* Enhanced Clickable Items */
     .clickable {
       display: flex;
       align-items: center;
@@ -172,7 +160,6 @@
       height: 100%;
     }
 
-    /* Modern Back Button */
     .back-button {
       display: inline-flex;
       align-items: center;
@@ -193,7 +180,6 @@
       box-shadow: 0 6px 20px rgba(0,123,255,0.4);
     }
 
-    /* Enhanced Section Design */
     .section {
       margin: 1.5rem;
       padding: 1.5rem;
@@ -213,7 +199,6 @@
       gap: 0.5rem;
     }
 
-    /* Restored Progress Bar */
     .progress-bar {
       height: 4px;
       background: var(--glass-bg);
@@ -228,7 +213,6 @@
       transition: width 0.4s ease;
     }
 
-    /* Adjusted Download Badge */
     .download-badge {
       display: inline-flex;
       align-items: center;
@@ -245,7 +229,6 @@
       transform: translateY(-2px);
     }
 
-    /* Styled search bar for dropdown sections */
     .search-bar {
       width: 80%;
       padding: 0.75rem 1rem;
@@ -261,7 +244,6 @@
       text-align: center;
     }
 
-    /* Adjusted Preview Image: made a bit larger */
     .preview-image {
       width: 100%;
       height: auto;
@@ -270,15 +252,31 @@
       border-radius: 10px;
     }
 
-    @media (max-width: 600px) {
-      #mainSection,
-      .hidden-section {
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .folder-container {
+        border-radius: 15px;
+        margin: 1rem;
+      }
+      .clickable {
+        padding: 1rem 1.5rem;
+      }
+      /* Increase logo size on mobile */
+      .logo {
+        width: 150px;
+        height: 150px;
+      }
+      /* Ensure the preview image fills the available space */
+      .preview-image {
         width: 100%;
-        max-width: 100%;
-        margin: 1rem auto;
-        padding: 0 1rem; /* optional: add horizontal padding */
+        max-width: none;
+      }
+      /* Adjust global search bar for smaller screens */
+      .global-search-bar {
+        width: 95%;
       }
     }
+
     /* Reduced Motion */
     @media (prefers-reduced-motion: reduce) {
       * {
@@ -289,12 +287,11 @@
   </style>
 </head>
 <body>
-  <!-- Add Font Awesome for icons -->
+  <!-- Font Awesome for icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   
   <input type="text" class="global-search-bar" placeholder="🔍 Search..." onkeyup="globalSearch(this.value)">
 
-  <!-- Logo is focusable and will be centered on load -->
   <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
   <a href="https://yashofree.github.io/link/" class="lobby-link">Hub</a>
   
@@ -306,10 +303,10 @@
       <i class="fas fa-cube"></i> Pack
     </div>
     
-	<div class="clickable" onclick="showSection('androidSection')">
+    <div class="clickable" onclick="showSection('androidSection')">
       <i class="fab fa-android"></i> Android
     </div>
-	
+    
     <div class="clickable" onclick="showSection('windowsSection')">
       <i class="fab fa-windows"></i> Windows
     </div>
@@ -325,9 +322,7 @@
     <input type="text" class="search-bar" placeholder="🔍 Search...">
     
     <div class="section">
-      <div class="section-title" style="color: #FFFFFF;">
-         Minecraft 1.21.60
-      </div>
+      <div class="section-title" style="color: #FFFFFF;">Minecraft 1.21.60</div>
       <div class="progress-bar">
         <div class="progress-fill"></div>
       </div>
@@ -345,19 +340,16 @@
     </button>
   </div>
 
-  <!-- Additional sections (packSection, windowsSection, iosSection) can be added similarly -->
-  
   <script>
     let searchTimeout;
     function globalSearch(query) {
       clearTimeout(searchTimeout);
       searchTimeout = setTimeout(() => {
         const normalizedQuery = query.toLowerCase().trim();
-        // Search implementation here
+        // Implement search functionality if needed
       }, 300);
     }
 
-    // When showing a section, scroll so its top aligns with the top of the viewport (lobby out of view)
     function showSection(sectionId) {
       document.getElementById('mainSection').style.display = "none";
       const sections = document.getElementsByClassName('hidden-section');
@@ -371,7 +363,6 @@
       section.focus();
     }
 
-    // Return to main section and scroll so it’s fully visible
     function goBack() {
       const sections = document.getElementsByClassName('hidden-section');
       for (let i = 0; i < sections.length; i++) {
@@ -381,7 +372,6 @@
       document.getElementById('mainSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
-    // On page load, set focus to the logo
     window.onload = function() {
       const logo = document.querySelector('.logo');
       if (logo) {
