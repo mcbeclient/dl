@@ -51,7 +51,7 @@
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      padding: calc(2rem + env(safe-area-inset-top)) 2rem 2rem;
+      padding: calc(0.5rem + env(safe-area-inset-top)) 2rem 2rem;
       background: linear-gradient(45deg, var(--background-dark), var(--background-darker), var(--background-gray));
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
@@ -62,7 +62,7 @@
     .global-search-bar {
       width: min(90%, 250px);
       padding: 0.5rem 1.5rem; /* Reduced vertical padding */
-      margin: 1rem 0;
+      margin: 0.5rem 0;
       border: 1px solid var(--border-color);
       border-radius: 50px;
       background: var(--glass-bg);
@@ -312,7 +312,12 @@
 </head>
 <body>
   <input type="text" class="global-search-bar" placeholder="🔍 Search..." onkeyup="globalSearch(this.value)">
-  <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
+  
+  <!-- Clickable logo directing to the new link -->
+  <a href="https://mcbeclient.github.io/dl/">
+    <img class="logo" src="https://i.pinimg.com/736x/d3/1d/07/d31d07313f89289e06d6cae9a38d998e.jpg" alt="Logo" tabindex="0">
+  </a>
+  
   <a href="https://yashofree.github.io/link/" class="lobby-link">Home</a>
   <div class="folder-container" id="mainSection">
     <div class="folder-header"><i class="fas fa-folder-open"></i> Clients</div>
