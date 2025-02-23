@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
@@ -362,7 +361,7 @@
 <br/>
     Pack
    </header>
-<input class="search-bar" placeholder="🔍 Search..." type="text"/>
+<input class="search-bar" placeholder="🔍 Search..." type="text" onkeyup="sectionSearch(this.value, 'packSection')"/>
 <div class="section">
 <div class="section-title">
      Bedezu Client v7.1
@@ -398,7 +397,7 @@
 <br/>
     Android
    </header>
-<input class="search-bar" placeholder="🔍 Search..." type="text"/>
+<input class="search-bar" placeholder="🔍 Search..." type="text" onkeyup="sectionSearch(this.value, 'androidSection')"/>
 <div class="section">
 <div class="section-title">
      Atlas Client
@@ -445,7 +444,7 @@
 <br/>
     Windows
    </header>
-<input class="search-bar" placeholder="🔍 Search..." type="text"/>
+<input class="search-bar" placeholder="🔍 Search..." type="text" onkeyup="sectionSearch(this.value, 'windowsSection')"/>
 <div class="section">
 <div class="section-title">
      OderSo Client
@@ -536,7 +535,7 @@
 <br/>
     iOS
    </header>
-<input class="search-bar" placeholder="🔍 Search..." type="text"/>
+<input class="search-bar" placeholder="🔍 Search..." type="text" onkeyup="sectionSearch(this.value, 'iosSection')"/>
 <button class="back-button" onclick="goBack()" style="animation: slideUp 0.5s ease-out;">
 <i class="fas fa-arrow-left">
 </i>
@@ -598,6 +597,39 @@
         }
       }, 300);
     }
+    
+    // New function to handle search within each hidden section individually
+    function sectionSearch(query, sectionId) {
+      const container = document.getElementById(sectionId);
+      const cards = container.querySelectorAll('.section');
+      const normalizedQuery = query.toLowerCase().trim();
+      let anyVisible = false;
+      cards.forEach(card => {
+        if (card.textContent.toLowerCase().includes(normalizedQuery)) {
+          card.style.display = "block";
+          anyVisible = true;
+        } else {
+          card.style.display = "none";
+        }
+      });
+      let noResultsElem = container.querySelector('.no-results');
+      if (!anyVisible) {
+        if (!noResultsElem) {
+          noResultsElem = document.createElement('div');
+          noResultsElem.className = 'no-results';
+          noResultsElem.textContent = 'No results found.';
+          noResultsElem.style.color = 'var(--text-dim)';
+          noResultsElem.style.textAlign = 'center';
+          noResultsElem.style.marginTop = '1rem';
+          container.appendChild(noResultsElem);
+        }
+      } else {
+        if (noResultsElem) {
+          noResultsElem.remove();
+        }
+      }
+    }
+    
     function showSection(sectionId) {
       document.getElementById('mainSection').style.display = "none";
       const sections = document.getElementsByClassName('hidden-section');
